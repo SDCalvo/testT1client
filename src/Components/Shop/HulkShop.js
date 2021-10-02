@@ -34,7 +34,14 @@ export default function HulkShop() {
     }
 
     async function handleBuy(){
+        
+        if(product.stock < product.quantity){
+            message.error('No hay suficiente stock');
+            return;
+        }
+        
         try{
+
             const user = JSON.parse(localStorage.getItem('user'));
             const token = user.token;
             console.log(token)
