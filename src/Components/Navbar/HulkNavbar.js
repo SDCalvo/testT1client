@@ -1,7 +1,7 @@
 import React from "react";
-import { Navbar, Nav, Modal } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { message } from "antd";
+import { message, Modal, Form, Button, Input } from "antd";
 import axios from "axios";
 
 export default function HulkNavbar() {
@@ -14,9 +14,20 @@ export default function HulkNavbar() {
     email: "",
     password: "",
   });
+  const [registerInput, setRegisterInput] = useState({
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    name: "",
+    lastName: "",
+  });
+  const [registerModalOpen, setRegisterModalOpen] = useState(false);
+
 
   useEffect(() => {
-    setAdmin(JSON.parse(localStorage.getItem("user")) || null);
+    const user = JSON.parse(localStorage.getItem("user")) || null;
+    const isAdmin = user?.role === "admin";
+    setAdmin(isAdmin);
     if (admin) {
       setIsLogged(true);
     } else {
@@ -26,9 +37,17 @@ export default function HulkNavbar() {
 
 
   function handleChange(e){
-
+    
     setLoginInput({
       ...loginInput,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  function handleChangeRegister(e){
+
+    setRegisterInput({
+      ...registerInput,
       [e.target.name]: e.target.value
     })
   }
@@ -75,9 +94,48 @@ export default function HulkNavbar() {
     message.success("Sesión cerrada");
   }
 
+  async function handleRegisterSubmit(e){
+    e.preventDefault();
+    if(registerInput.email === "" || registerInput.password === "" || registerInput.name === "" || registerInput.lastName === ""){
+      message.error("Por favor llene todos los campos");
+    }else if(registerInput.password !== registerInput.passwordConfirm){
+      message.error("Las contraseñas no coinciden");
+    }else if (registerInput.email.indexOf("@") === -1){
+      message.error("El email no es válido");
+    }else{
+      try{
+        const response = await axios.post(`${baseURL}/user`, {
+          email: registerInput.email,
+          password: registerInput.password,
+          name: registerInput.name,
+          lastName: registerInput.lastName
+        });
+        console.log(response)
+        const config = {
+            top: 100,
+            duration: 2,
+            maxCount: 1,
+            content: "Usuario creado con éxito"
+        };
+          setRegisterModalOpen(false);
+          message.success(config);
+      }catch(error){
+        setRegisterModalOpen(false);
+        const config = {
+            top: 100,
+            duration: 2,
+            maxCount: 1,
+            content: error.response.data.message
+        };
+        message.error(config);
+      }
+    }
+  }
+
+
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid px-4" style={{backgroundColor: "#212529"}}>
         <div className="row">
           <Navbar bg="dark" variant="dark" className="d-flex justify-content-between">
             <Navbar.Brand href="#home">
@@ -90,64 +148,77 @@ export default function HulkNavbar() {
               />
             </Navbar.Brand>
             <Nav className="mr-auto">
-              <Nav.Link href="/">Inicio</Nav.Link>
-              <Nav.Link href="/cart">Carrito</Nav.Link>
-              {admin && <Nav.Link href="/admin">Admin</Nav.Link>}
-              {!isLogged && <Nav.Link onClick={() => setLoginModalOpen(true)} >Login</Nav.Link>}
-              {isLogged && <Nav.Link onClick={(e) => handleLogout(e)}>Logout</Nav.Link>}
+              <Nav.Link href="/" className="text-white" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
+              <Nav.Link href="/cart" className="text-white" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
+              {admin && <Nav.Link href="/admin" className="text-white" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
+              {!isLogged && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
+              {!isLogged && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
+              {isLogged && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
             </Nav>
           </Navbar>
         </div>
       </div>
-      <Modal show={loginModalOpen}>
-        <Modal.Header>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email</label>
-              <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Ingrese su email"
-                  name="email"
-                  onChange={(e) => handleChange(e)}
-                  value={loginInput.email}
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                Nunca compartiremos su email con nadie más.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
-                  type="password"
-                  name="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                  onChange={(e) => handleChange(e)}
-                  value={loginInput.password}
-              />
-            </div>
-            <button type="submit" className="btn btn-primary my-2" onClick={(e) => handleLoginSubmit(e)}>
-              Submit
-            </button>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => setLoginModalOpen(false)}
-          >
-            Close
-          </button>
-        </Modal.Footer>
+      
+      <Modal
+        title="Login"
+        visible={loginModalOpen}
+        onOk={() => setLoginModalOpen(false)}
+        onCancel={() => setLoginModalOpen(false)}
+        footer={null}
+      >
+        <Form>
+          <Form.Item label="Email">
+            <Input name="email" value={loginInput.email} onChange={(e) => handleChange(e)} />
+          </Form.Item>
+          <Form.Item label="Contraseña">
+            <Input.Password name="password" value={loginInput.password} onChange={(e) => handleChange(e)} />
+          </Form.Item>
+          <Form.Item>
+            <Button 
+              type="primary" 
+              htmlType="submit"
+              onClick={(e) => handleLoginSubmit(e)} 
+            >
+              Ingresar
+            </Button>
+          </Form.Item>
+        </Form>
       </Modal>
+
+      <Modal
+        title="Registrarse"
+        visible={registerModalOpen}
+        onOk={() => setRegisterModalOpen(false)}
+        onCancel={() => setRegisterModalOpen(false)}
+        footer={null}
+      >
+        <Form>
+          <Form.Item label="Email">
+            <Input name="email" value={registerInput.email} onChange={(e) => handleChangeRegister(e)} />
+          </Form.Item>
+          <Form.Item label="Contraseña">
+            <Input.Password name="password" value={registerInput.password} onChange={(e) => handleChangeRegister(e)} />
+          </Form.Item>
+          <Form.Item label="Confirmar contraseña">
+            <Input.Password name="passwordConfirm" value={registerInput.passwordConfirm} onChange={(e) => handleChangeRegister(e)} />
+          </Form.Item>
+          <Form.Item label="Nombre">
+            <Input name="name" value={registerInput.name} onChange={(e) => handleChangeRegister(e)} />
+          </Form.Item>
+          <Form.Item label="Apellido">
+            <Input name="lastName" value={registerInput.lastName} onChange={(e) => handleChangeRegister(e)} />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={(e) => handleRegisterSubmit(e)}
+            >
+              Registrarse
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>      
     </>
   );
 }
