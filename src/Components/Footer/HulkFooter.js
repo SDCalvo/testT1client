@@ -5,7 +5,7 @@ export default function HulkFooter() {
     return (
         <div 
             className="container-fluid py-4"
-            style={{ backgroundColor: "#212529", position: "fixed", bottom: 0}}
+            style={{ backgroundColor: "#212529" }}
         >
             <div className="row">
                 <div className="col-md-12 text-white d-flex justify-content-between px-5 align-items-center">

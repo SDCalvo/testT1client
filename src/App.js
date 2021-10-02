@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom';
 import HulkNavbar from './Components/Navbar/HulkNavbar'
 import HulkFooter from './Components/Footer/HulkFooter'
 import Admin from './Components/Admin/Admin'
+import HulkShop from './Components/Shop/HulkShop'
+
 function App() {
 
   return (
@@ -13,7 +15,7 @@ function App() {
       <Router>
         <HulkNavbar />
         <Switch>
-          <Route exact path="/" />
+          <Route exact path="/" component={HulkShop}/>
           <Route path="/cart" />
           <Route path="/admin" component={Admin} />
         </Switch>

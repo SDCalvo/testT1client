@@ -102,7 +102,7 @@ export default function Admin() {
     
     return (
     <>
-        <div className="container">
+        <div className="container my-5">
             <div className="row">
                 <div className="col-12 my-5">
                     <h1>Administración de productos</h1>
@@ -137,7 +137,7 @@ export default function Admin() {
                                                     <img src={product.img} alt={product.name} width="100" />
                                                 </td>
                                                 <td className="align-middle">{product.name}</td>
-                                                <td className="align-middle">{product.price}</td>
+                                                <td className="align-middle">${product.price}</td>
                                                 <td className="align-middle">{product.description}</td>
                                                 <td className="align-middle">{product.stock}</td>
                                                 <td className="align-middle">
