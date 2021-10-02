@@ -2,6 +2,7 @@ import React from "react";
 import {useState, useEffect} from "react";
 import { Button, Space, Modal, message} from 'antd';
 import {Spinner, Card} from 'react-bootstrap';
+import {useHistory} from "react-router-dom";
 import axios from 'axios';
 
 export default function HulkShop() {
@@ -13,6 +14,8 @@ export default function HulkShop() {
         productId: '',
         quantity: 0
     });
+
+    const history = useHistory();
 
     async function fetchProducts() {
         setLoading(true);
@@ -45,6 +48,7 @@ export default function HulkShop() {
             }, {headers});
             message.success(`Producto añadido al carrito`);
             setShow(false);
+            history.push('/cart');
         } catch (error) {
             message.error(`Error al añadir producto al carrito`);
             console.log(error);

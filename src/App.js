@@ -7,6 +7,8 @@ import HulkNavbar from './Components/Navbar/HulkNavbar'
 import HulkFooter from './Components/Footer/HulkFooter'
 import Admin from './Components/Admin/Admin'
 import HulkShop from './Components/Shop/HulkShop'
+import HulkCart from './Components/Cart/HulkCart'
+import { useState } from 'react';
 
 function App() {
 
@@ -15,9 +17,15 @@ function App() {
       <Router>
         <HulkNavbar />
         <Switch>
-          <Route exact path="/" component={HulkShop}/>
-          <Route path="/cart" />
-          <Route path="/admin" component={Admin} />
+          <Route exact path="/">
+            <HulkShop/>
+          </Route>
+          <Route path="/cart" >
+            <HulkCart/>
+          </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
         </Switch>
         <HulkFooter />
       </Router>
