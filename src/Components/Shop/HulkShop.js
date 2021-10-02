@@ -46,7 +46,7 @@ export default function HulkShop() {
             message.success(`Producto añadido al carrito`);
             setShow(false);
         } catch (error) {
-            message.error(`Error al añadir al carrito`);
+            message.error(`Error al añadir producto al carrito`);
             console.log(error);
         }
     }
@@ -70,7 +70,7 @@ export default function HulkShop() {
                             products.map(product => (
                                 <div className="col-md-4 my-3 d-flex justify-content-center align-items-center" key={product._id}>
                                     <Card
-                                        style={{ width: '18rem' }}
+                                        style={{ width: '18rem', height: '26rem' }}
                                         className="text-center"
                                         text="dark"
                                         bg="light"
@@ -85,10 +85,29 @@ export default function HulkShop() {
                                             <Card.Text>
                                                 Precio: ${product.price}
                                             </Card.Text>
-                                            <Button
-                                                type="ghost" 
-                                                onClick={() => handleOpenBuyModal(product)}
-                                            >Comprar</Button>
+                                            <Card.Text>
+                                                Stock: {product.stock}
+                                            </Card.Text>
+                                            {product.stock > 0 ?
+                                            <>
+                                                <Card.Text className="text-success">
+                                                    Producto disponible
+                                                </Card.Text>
+                                                <Button
+                                                    type="ghost" 
+                                                    onClick={() => handleOpenBuyModal(product)}
+                                                >Comprar</Button>
+                                            </>
+                                            :
+                                            <>
+                                                <Card.Text className="text-danger">
+                                                    Producto agotado
+                                                </Card.Text>
+                                                <Button
+                                                    type="ghost"
+                                                    disabled
+                                                >Comprar</Button>
+                                            </>}
                                         </Card.Body>
                                     </Card>
                                 </div>
