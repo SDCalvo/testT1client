@@ -39,6 +39,10 @@ export default function HulkShop() {
             message.error('No hay suficiente stock');
             return;
         }
+        if(product.quantity <= 0){
+            message.error('La cantidad debe ser mayor a 0');
+            return;
+        }
         
         try{
 
