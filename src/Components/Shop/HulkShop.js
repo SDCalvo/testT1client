@@ -70,7 +70,7 @@ export default function HulkShop() {
                             products.map(product => (
                                 <div className="col-md-4 my-3 d-flex justify-content-center align-items-center" key={product._id}>
                                     <Card
-                                        style={{ width: '18rem', height: '26rem' }}
+                                        style={{ width: '18rem', height: '27rem' }}
                                         className="text-center"
                                         text="dark"
                                         bg="light"
@@ -90,7 +90,7 @@ export default function HulkShop() {
                                             </Card.Text>
                                             {product.stock > 0 ?
                                             <>
-                                                <Card.Text className="text-success">
+                                                <Card.Text className="text-success fw-bold">
                                                     Producto disponible
                                                 </Card.Text>
                                                 <Button
@@ -100,7 +100,7 @@ export default function HulkShop() {
                                             </>
                                             :
                                             <>
-                                                <Card.Text className="text-danger">
+                                                <Card.Text className="text-danger fw-bold">
                                                     Producto agotado
                                                 </Card.Text>
                                                 <Button
