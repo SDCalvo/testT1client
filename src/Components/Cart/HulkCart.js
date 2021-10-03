@@ -131,9 +131,9 @@ export default function HulkCart() {
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{item.product.name}</td>
-                                            <td>{item.product.price}</td>
+                                            <td>${item.product.price}</td>
                                             <td>{item.quantity}</td>
-                                            <td>{item.total}</td>
+                                            <td>${item.total}</td>
                                             <td>
                                                 <Button 
                                                     type="primary"

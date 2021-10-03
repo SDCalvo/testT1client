@@ -7,6 +7,7 @@ import { Table, Spinner } from 'react-bootstrap';
 export default function Admin() {
 
     const [products, setProducts] = useState([]);
+    const [sales, setSales] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [addModalOpen, setAddModalOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function Admin() {
 
     useEffect(() => {
         fetchProducts();
+        fetchSales();
     }, []);
     
     async function fetchProducts() {
@@ -26,6 +28,28 @@ export default function Admin() {
         } catch(error) {
             console.log(error);
             message.error('Error cargando productos, intente de nuevo');
+        }
+    }
+
+    async function fetchSales() {
+        try{
+            setLoading(true);
+            const user = JSON.parse(localStorage.getItem('user'));
+            const token = user.token;
+            const headers = {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+            };
+            const response = await axios.get(process.env.REACT_APP_DB_URL + '/sales', { headers });
+            const sales = response.data.data;
+            const sortedSales = sales.sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+            });
+            setSales(sortedSales);
+            setLoading(false);
+        } catch(error) {
+            console.log(error);
+            message.error('Error cargando ventas, intente de nuevo');
         }
     }
 
@@ -162,6 +186,59 @@ export default function Admin() {
                         className="btn btn-primary"
                         onClick={() => setAddModalOpen(true)}
                     >Agregar producto</button>
+                </div>
+                <div className="col-12 my-5">
+                    <h2>Ventas</h2>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Método de pago</th>
+                                <th>Observaciones</th>
+                                <th>Productos</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                loading ?
+                                    <tr>
+                                        <td colSpan="4">
+                                            <Spinner animation="border" variant="primary" />
+                                        </td>
+                                    </tr>
+                                :
+                                    sales.map((sale, index) => {
+                                        const date = new Date(sale.createdAt);
+                                        const formatedDate = date.toLocaleDateString();
+                                        return (
+                                            <tr key={index}>
+                                                <td className="align-middle">{index + 1}</td>
+                                                <td className="align-middle">{formatedDate}</td>
+                                                <td className="align-middle">{sale.paymentMethod}</td>
+                                                <td className="align-middle">{sale.observation}</td>
+                                                <td className="align-middle">
+                                                    {
+                                                        sale.detail.map((detail, index) => {
+                                                            console.log("detail: ", detail);
+                                                            return (
+                                                                <div key={index} className='bg-primary rounded my-1 text-light'>
+                                                                    <p className="m-0">Nombre: {detail.product.name}</p>
+                                                                    <p className="m-0">${detail.product.price}</p>
+                                                                    <p className="m-0">Cantidad: {detail.quantity}</p>    
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </td>
+                                                <td className="align-middle">${sale.total}</td>
+                                            </tr>
+                                        )
+                                    })
+                            }
+                        </tbody>
+                    </Table>
                 </div>
             </div>
         </div>
