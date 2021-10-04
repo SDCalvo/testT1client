@@ -25,7 +25,7 @@ function App() {
           <Route path="/cart" >
             <HulkCart/>
           </Route>
-          <Route path="/admin">
+          <Route path="/admin" isLoggedIn={isLoggedIn}>
             <Admin />
           </Route>
         </Switch>
