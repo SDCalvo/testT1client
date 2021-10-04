@@ -137,7 +137,7 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
     <>
       <div className="container-fluid px-4" style={{backgroundColor: "#212529"}}>
         <div className="row">
-          <Navbar bg="dark" variant="dark" className="d-flex justify-content-between">
+          <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-between">
             <Navbar.Brand href="#home">
               <img
                   alt="Hulk logo"
@@ -148,14 +148,17 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
               />
               <span className="ms-4 text-success fw-bold h3">HulkStore</span>
             </Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link href="/" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
-              <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
-              {admin && <Nav.Link href="/admin" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
-              {!isLoggedIn && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
-              {!isLoggedIn && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
-              {isLoggedIn && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
-            </Nav>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ms-auto">
+                <Nav.Link href="/" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
+                <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
+                {admin && <Nav.Link href="/admin" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
+                {!isLoggedIn && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
+                {!isLoggedIn && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
+                {isLoggedIn && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
+              </Nav>
+            </Navbar.Collapse>
           </Navbar>
         </div>
       </div>
