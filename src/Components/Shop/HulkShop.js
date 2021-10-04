@@ -88,11 +88,11 @@ export default function HulkShop({isLoggedIn, setIsLoggedIn}) {
                 </div>
                 <div className="col-12">
                     <h3 className="fw-bold textShadow text-success">Ultimos productos</h3>
-                    <Carousel autoplay className="bg-dark rounded border mb-5">
+                    <Carousel autoplay className="bg-dark rounded border mb-5 hulkCarousel">
                         {latestProducts.map(product => (
                             <Carousel.Item key={product._id}>
                                 <img
-                                    className="d-block m-auto hulkCarouselImg"
+                                    className="d-block m-auto img-fluid hulkCarousel"
                                     src={product.img}
                                     alt="First slide"
                                 />

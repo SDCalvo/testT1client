@@ -9,16 +9,8 @@
 }
 
 .hulkCarousel{
-    height: 600px !important;
     max-height: 600px !important;
-    min-height: 600px !important;
-}
-
-.hulkCarouselImg{
-    height: 600px !important;
-    max-height: 600px !important;
-    min-height: 600px !important;
-
+    min-height: 400px !important;
 }
 
 .glass{
