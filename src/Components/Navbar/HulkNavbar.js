@@ -152,7 +152,7 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto">
                 <Nav.Link href="/" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
-                <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
+                {isLoggedIn && <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>}
                 {admin && <Nav.Link href="/admin" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
                 {!isLoggedIn && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
                 {!isLoggedIn && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
