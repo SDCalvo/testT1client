@@ -106,7 +106,7 @@ export default function HulkCart() {
                 </div>
                 {cart.length > 0 ? <>
                     <div className="col-md-12">
-                    <Table striped bordered hover className="bg-light">
+                    <Table striped bordered responsive hover className="bg-light">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -148,11 +148,10 @@ export default function HulkCart() {
                     </Table>
                 </div>
                 <div className="col-md-12">
-                    <h3 className="text-center">Total: ${total}</h3>
-                </div>
-                <div className="col-md-12">
+                    <h3 className="text-center p-2 bg-light rounded">Total: ${total}</h3>
                     <Button type="primary" onClick={() => history.push('/')}>Seguir comprando</Button>
                 </div>
+                
                 <div className="col-md-12 border my-5 bg-light rounded p-4">
                     <h4 className="text-center">Confirmar compra</h4>
                     <Form>

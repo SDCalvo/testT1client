@@ -134,7 +134,7 @@ export default function Admin() {
             </div>
             <div className="row">
                 <div className="col-12">
-                    <Table striped bordered hover className="bg-light">
+                    <Table responsive striped bordered hover className="bg-light">
                         <thead>
                             <tr>
                                 <th>Imagen</th>
@@ -189,7 +189,7 @@ export default function Admin() {
                 </div>
                 <div className="col-12 my-5">
                     <h2 className="fw-bold textShadow text-success">Ventas</h2>
-                    <Table striped bordered hover className="bg-light">
+                    <Table responsive striped bordered hover className="bg-light">
                         <thead>
                             <tr>
                                 <th>#</th>

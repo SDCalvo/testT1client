@@ -84,7 +84,7 @@ export default function HulkShop({isLoggedIn, setIsLoggedIn}) {
         <div className="container my-5">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="hulkTitle text-success">Hulk Store</h1>
+                    <div className='bgImg rounded'><h1  className="hulkTitle text-success rounded">Hulk Store</h1></div>
                 </div>
                 <div className="col-12">
                     <h3 className="fw-bold textShadow text-success">Ultimos productos</h3>

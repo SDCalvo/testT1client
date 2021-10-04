@@ -28,12 +28,11 @@
 }
 
 .hulkTitle{
-    border-radius: 8px;
     font-size: 8vw;
     font-weight: 900;
-    background-color: #000;
     display: block;
     padding: .5em;
+    background-color: #000;
     text-shadow: 2px 2px 2px #fff !important; 
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
@@ -41,12 +40,18 @@
 }
 
 .hulkTitle:hover{
-    background-color: #c3f3cf;
+    background-color: rgba(0, 155, 13, 0);
     text-shadow: 2px 2px 2px rgb(255, 255, 255) !important; 
     color: #000 !important;
     -webkit-transition: background-color 1000ms linear;
     -ms-transition: background-color 1000ms linear;
     transition: background-color 1000ms linear;
 }
+
+.bgImg{
+    
+    background-image: url('https://wallpaper.dog/large/10939302.jpg');
+}
+
 
 
