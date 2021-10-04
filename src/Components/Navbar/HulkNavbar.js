@@ -5,12 +5,11 @@ import { message, Modal, Form, Button, Input } from "antd";
 import axios from "axios";
 import './HulkNavbar.css'
 
-export default function HulkNavbar() {
+export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
   const [admin, setAdmin] = useState(
       JSON.parse(localStorage.getItem("user")) || null
   );
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
@@ -30,9 +29,9 @@ export default function HulkNavbar() {
     const isAdmin = user?.role === "admin";
     setAdmin(isAdmin);
     if (admin) {
-      setIsLogged(true);
+      setIsLoggedIn(true);
     } else {
-      setIsLogged(false);
+      setIsLoggedIn(false);
     }
   }, [admin]);
 
@@ -76,7 +75,7 @@ export default function HulkNavbar() {
             token: response.data.token
           }
           localStorage.setItem("user", JSON.stringify(user));
-          setIsLogged(true);
+          setIsLoggedIn(true);
           setLoginModalOpen(false);
           message.success("Bienvenido");
         }
@@ -91,7 +90,7 @@ export default function HulkNavbar() {
     e.preventDefault();
     localStorage.removeItem("user");
     setAdmin(false);
-    setIsLogged(false);
+    setIsLoggedIn(false);
     message.success("Sesión cerrada");
   }
 
@@ -153,9 +152,9 @@ export default function HulkNavbar() {
               <Nav.Link href="/" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
               <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
               {admin && <Nav.Link href="/admin" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
-              {!isLogged && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
-              {!isLogged && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
-              {isLogged && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
+              {!isLoggedIn && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
+              {!isLoggedIn && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
+              {isLoggedIn && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
             </Nav>
           </Navbar>
         </div>

@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 import axios from 'axios';
 import './HulkShop.css'
 
-export default function HulkShop() {
+export default function HulkShop({isLoggedIn, setIsLoggedIn}) {
 
     const [products, setProducts] = useState([]);
     const [latestProducts, setLatestProducts] = useState([]);
@@ -32,7 +32,9 @@ export default function HulkShop() {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+        const loggedIn = localStorage.getItem('user') !== null;
+        setIsLoggedIn(loggedIn);
+    }, [isLoggedIn]);
 
     function handleOpenBuyModal(product) {
         setProduct({...product, productId: product._id, quantity: 1});
@@ -47,6 +49,11 @@ export default function HulkShop() {
         }
         if(product.quantity <= 0){
             message.error('La cantidad debe ser mayor a 0');
+            return;
+        }
+
+        if(!isLoggedIn){
+            message.error('Debes iniciar sesión para comprar');
             return;
         }
         
@@ -95,7 +102,7 @@ export default function HulkShop() {
                                     {product.stock > 0 ? (
                                         <Button className="btn-success" onClick={() => handleOpenBuyModal(product)}>Comprar</Button>
                                     ) : (
-                                        <Button className="btn-success" disabled>Comprar</Button>
+                                        <Button className="btn-success" disabled>Añadir al carrito</Button>
                                     )}
                                 </Carousel.Caption>
                             </Carousel.Item>
@@ -152,7 +159,7 @@ export default function HulkShop() {
                                                 <Button
                                                     type="ghost"
                                                     disabled
-                                                >Comprar</Button>
+                                                >Añadir al carrito</Button>
                                             </>}
                                         </Card.Body>
                                     </Card>
