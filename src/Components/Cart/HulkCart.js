@@ -148,7 +148,7 @@ export default function HulkCart() {
                     </Table>
                 </div>
                 <div className="col-md-12">
-                    <h3 className="text-center">Total: {total}</h3>
+                    <h3 className="text-center">Total: ${total}</h3>
                 </div>
                 <div className="col-md-12">
                     <Button type="primary" onClick={() => history.push('/')}>Seguir comprando</Button>
