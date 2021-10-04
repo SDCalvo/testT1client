@@ -100,7 +100,7 @@ export default function HulkShop({isLoggedIn, setIsLoggedIn}) {
                                     <h3 className="text-success fw-bold textShadow p-1">{product.name}</h3>
                                     <p className="text-dark">{product.description}</p>
                                     {product.stock > 0 ? (
-                                        <Button className="btn-success" onClick={() => handleOpenBuyModal(product)}>Comprar</Button>
+                                        <Button className="btn-success" onClick={() => handleOpenBuyModal(product)}>Añadir al carrito</Button>
                                     ) : (
                                         <Button className="btn-success" disabled>Añadir al carrito</Button>
                                     )}

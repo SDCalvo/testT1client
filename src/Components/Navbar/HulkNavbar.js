@@ -67,7 +67,6 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
           email: loginInput.email,
           password: loginInput.password
         });
-        console.log(response)
         if(response.status === 200){
           setAdmin(response.data.role === "admin" ? true : false);
           const user = {
@@ -83,7 +82,7 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
         }
       }catch(error){
         message.error("Usuario o contraseña incorrectos");
-        console.log("error: ", error);
+        console.log("error: ", error.message);
       }
     }
   }
