@@ -1,0 +1,23 @@
+
+.hulkCard{
+    transition: all 0.3s ease-in-out;
+}
+
+.hulkCard:hover{
+    box-shadow: 0px 0px 10px #000000;
+    transform: scale(1.1);
+}
+
+.hulkCarousel{
+    height: 600px !important;
+    max-height: 600px !important;
+    min-height: 600px !important;
+}
+
+.hulkCarouselImg{
+    height: 600px !important;
+    max-height: 600px !important;
+    min-height: 600px !important;
+    
+}
+

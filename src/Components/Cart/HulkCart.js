@@ -106,7 +106,7 @@ export default function HulkCart() {
                 </div>
                 {cart.length > 0 ? <>
                     <div className="col-md-12">
-                    <Table striped bordered hover>
+                    <Table striped bordered hover className="bg-light">
                         <thead>
                             <tr>
                                 <th>#</th>

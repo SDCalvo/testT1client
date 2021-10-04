@@ -8,7 +8,6 @@ import HulkFooter from './Components/Footer/HulkFooter'
 import Admin from './Components/Admin/Admin'
 import HulkShop from './Components/Shop/HulkShop'
 import HulkCart from './Components/Cart/HulkCart'
-import { useState } from 'react';
 
 function App() {
 

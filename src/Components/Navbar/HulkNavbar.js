@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { message, Modal, Form, Button, Input } from "antd";
 import axios from "axios";
+import './HulkNavbar.css'
 
 export default function HulkNavbar() {
   const [admin, setAdmin] = useState(
@@ -146,14 +147,15 @@ export default function HulkNavbar() {
                   height="40"
                   className="d-inline-block align-top border rounded"
               />
+              <span className="ms-4 text-success fw-bold h3">HulkStore</span>
             </Navbar.Brand>
             <Nav className="mr-auto">
-              <Nav.Link href="/" className="text-white" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
-              <Nav.Link href="/cart" className="text-white" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
-              {admin && <Nav.Link href="/admin" className="text-white" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
-              {!isLogged && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
-              {!isLogged && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
-              {isLogged && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
+              <Nav.Link href="/" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Inicio</Nav.Link>
+              <Nav.Link href="/cart" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Carrito</Nav.Link>
+              {admin && <Nav.Link href="/admin" className="text-white hulkLink" style={{ fontSize: "1rem" }}>Admin</Nav.Link>}
+              {!isLogged && <Nav.Link onClick={() => setLoginModalOpen(true)}  className="text-white hulkLink" style={{ fontSize: "1rem" }}>Login</Nav.Link>}
+              {!isLogged && <Nav.Link onClick={() => setRegisterModalOpen(true)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Registrarse</Nav.Link>}
+              {isLogged && <Nav.Link onClick={(e) => handleLogout(e)} className="text-white hulkLink" style={{ fontSize: "1rem" }}>Logout</Nav.Link>}
             </Nav>
           </Navbar>
         </div>
