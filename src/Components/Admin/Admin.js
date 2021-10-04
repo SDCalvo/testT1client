@@ -5,7 +5,7 @@ import { message, Modal } from 'antd';
 import { Table, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
-export default function Admin({isLoggedIn}) {
+export default function Admin() {
 
     const [products, setProducts] = useState([]);
     const [sales, setSales] = useState([]);
@@ -13,19 +13,19 @@ export default function Admin({isLoggedIn}) {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [addModalOpen, setAddModalOpen] = useState(false);
     const [editInput, setEditInput] = useState({});
-    const [addInput, setAddInput] = useState({});	
+    const [addInput, setAddInput] = useState({});
 
     const history = useHistory();
-
-    if(!isLoggedIn || JSON.parse(localStorage.getItem('user')).role !== 'admin') {
-        history.push('/');
-    }
-
+    
     useEffect(() => {
         fetchProducts();
         fetchSales();
+        const user = JSON.parse(localStorage.getItem('user'));
+        if(!user || !user.role === 'admin') {
+            history.push('/');
+        }
     }, []);
-    
+
     async function fetchProducts() {
         try{
             setLoading(true);

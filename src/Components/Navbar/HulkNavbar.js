@@ -30,10 +30,8 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
     const user = JSON.parse(localStorage.getItem("user")) || null;
     const isAdmin = user?.role === "admin";
     setAdmin(isAdmin);
-    if (admin) {
+    if(user){
       setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
     }
   }, [admin]);
 
@@ -92,6 +90,7 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
     localStorage.removeItem("user");
     setAdmin(false);
     setIsLoggedIn(false);
+    history.push("/");
     message.success("Sesión cerrada");
   }
 

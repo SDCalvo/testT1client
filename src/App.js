@@ -8,11 +8,11 @@ import HulkFooter from './Components/Footer/HulkFooter'
 import Admin from './Components/Admin/Admin'
 import HulkShop from './Components/Shop/HulkShop'
 import HulkCart from './Components/Cart/HulkCart'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
@@ -25,7 +25,7 @@ function App() {
           <Route path="/cart" >
             <HulkCart/>
           </Route>
-          <Route path="/admin" isLoggedIn={isLoggedIn}>
+          <Route path="/admin">
             <Admin />
           </Route>
         </Switch>
