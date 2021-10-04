@@ -102,7 +102,7 @@ export default function HulkCart() {
         <div className="container my-5">
             <div className="row">
                 <div className="col-md-12">
-                    <h1 className="text-center">Carrito</h1>
+                    <h1 className="fw-bold textShadow text-success">Carrito</h1>
                 </div>
                 {cart.length > 0 ? <>
                     <div className="col-md-12">

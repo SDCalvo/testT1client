@@ -18,6 +18,43 @@
     height: 600px !important;
     max-height: 600px !important;
     min-height: 600px !important;
-    
+
 }
+
+.glass{
+
+    backdrop-filter: blur(8px) saturate(151%);
+    -webkit-backdrop-filter: blur(8px) saturate(151%);
+    background-color: rgba(228, 241, 215, 0.41);
+    border-radius: 12px;
+    
+    border: 1px solid rgb(0, 155, 13);  
+}
+
+.textShadow{
+    text-shadow: 2px 2px 2px #000000 !important;
+}
+
+.hulkTitle{
+    border-radius: 8px;
+    font-size: 8vw;
+    font-weight: 900;
+    background-color: #000;
+    display: block;
+    padding: .5em;
+    text-shadow: 2px 2px 2px #fff !important; 
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+.hulkTitle:hover{
+    background-color: #c3f3cf;
+    text-shadow: 2px 2px 2px rgb(255, 255, 255) !important; 
+    color: #000 !important;
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
 

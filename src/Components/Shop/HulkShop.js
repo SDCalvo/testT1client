@@ -77,10 +77,10 @@ export default function HulkShop() {
         <div className="container my-5">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="fw-bold text-success">Hulk Store</h1>
+                    <h1 className="hulkTitle text-success">Hulk Store</h1>
                 </div>
                 <div className="col-12">
-                    <h3 className="text-dark">Ultimos productos</h3>
+                    <h3 className="fw-bold textShadow text-success">Ultimos productos</h3>
                     <Carousel autoplay className="bg-dark rounded border mb-5">
                         {latestProducts.map(product => (
                             <Carousel.Item key={product._id}>
@@ -89,8 +89,8 @@ export default function HulkShop() {
                                     src={product.img}
                                     alt="First slide"
                                 />
-                                <Carousel.Caption className="bg-light rounded border">
-                                    <h3 className="text-success">{product.name}</h3>
+                                <Carousel.Caption className="glass rounded border">
+                                    <h3 className="text-success fw-bold textShadow p-1">{product.name}</h3>
                                     <p className="text-dark">{product.description}</p>
                                     {product.stock > 0 ? (
                                         <Button className="btn-success" onClick={() => handleOpenBuyModal(product)}>Comprar</Button>
@@ -104,7 +104,7 @@ export default function HulkShop() {
                     </Carousel>
                 </div>
                 <div className="col-12">
-                    <h3>Todos nuestros productos</h3>
+                    <h3 className="fw-bold textShadow text-success">Todos nuestros productos</h3>
                     <div className='row justify-content-center align-items-center'>
                         {loading ? 
                             <Spinner 

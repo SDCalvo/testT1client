@@ -129,7 +129,7 @@ export default function Admin() {
         <div className="container my-5">
             <div className="row">
                 <div className="col-12 my-5">
-                    <h1>Administración de productos</h1>
+                    <h1 className="fw-bold textShadow text-success">Administración de productos</h1>
                 </div>
             </div>
             <div className="row">
@@ -188,7 +188,7 @@ export default function Admin() {
                     >Agregar producto</button>
                 </div>
                 <div className="col-12 my-5">
-                    <h2>Ventas</h2>
+                    <h2 className="fw-bold textShadow text-success">Ventas</h2>
                     <Table striped bordered hover className="bg-light">
                         <thead>
                             <tr>

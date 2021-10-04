@@ -40,3 +40,7 @@
 body{
   background-color: #c3f3cf !important;
 }
+
+.textShadow{
+  text-shadow: 1px 1px 1px #00000085 !important;
+}
