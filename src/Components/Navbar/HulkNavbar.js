@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { message, Modal, Form, Button, Input, Space } from "antd";
 import axios from "axios";
 import './HulkNavbar.css'
@@ -23,6 +24,7 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
   });
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
 
+  const history = useHistory();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user")) || null;
@@ -138,7 +140,9 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
       <div className="container-fluid px-4" style={{backgroundColor: "#212529"}}>
         <div className="row">
           <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-between">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand 
+              onClick={() => history.push("/")}
+            >
               <img
                   alt="Hulk logo"
                   src='https://www.logolynx.com/images/logolynx/79/798eb16216073012f2690e0423445ac0.jpeg'
