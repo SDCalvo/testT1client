@@ -44,3 +44,7 @@ body{
 .textShadow{
   text-shadow: 1px 1px 1px #00000085 !important;
 }
+
+.registerBtn{
+  margin-left: auto !important;
+}

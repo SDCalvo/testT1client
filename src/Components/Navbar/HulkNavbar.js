@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { message, Modal, Form, Button, Input } from "antd";
+import { message, Modal, Form, Button, Input, Space } from "antd";
 import axios from "axios";
 import './HulkNavbar.css'
 
@@ -209,15 +209,22 @@ export default function HulkNavbar({isLoggedIn, setIsLoggedIn}) {
           <Form.Item label="Apellido">
             <Input name="lastName" value={registerInput.lastName} onChange={(e) => handleChangeRegister(e)} />
           </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={(e) => handleRegisterSubmit(e)}
+            <Space
+              style={{
+                justifyContent: 'right',
+                width: '100%',
+              }}
             >
-              Registrarse
-            </Button>
-          </Form.Item>
+            <Form.Item >
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={(e) => handleRegisterSubmit(e)}
+              >
+                Registrarse
+              </Button>
+            </Form.Item>
+          </Space>
         </Form>
       </Modal>      
     </>
